@@ -11,13 +11,15 @@ public class Deck {
         this.cards = new ArrayList<Card>();
     }
 
-    public void createFullDeck(){
+    public void createFullDeck() {
 
         for(Suit cardSuit: Suit.values()) {
             for(Value cardValue : Value.values()) {
                 this.cards.add(new Card(cardSuit, cardValue));
+
             }
         }
+
     }
 
     public void shuffle() {
@@ -55,7 +57,7 @@ public class Deck {
 
     public void draw(Deck comingFrom){
         this.cards.add(comingFrom.getCard(0));
-        comingFrom.removeCard(0);
+        comingFrom.cards.remove(0);
     }
 
     public int deckSize(){

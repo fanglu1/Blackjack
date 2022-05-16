@@ -13,7 +13,7 @@ public class Blackjack {
         Deck playerDeck = new Deck();
         Deck dealerDeck = new Deck();
 
-        double playerMoney = 100;
+        double playerMoney = 1000;
 
         Scanner input = new Scanner(System.in);
 
@@ -26,11 +26,11 @@ public class Blackjack {
             }
 
             boolean endRound = false;
-            playerDeck.draw(playerDeck);
-            playerDeck.draw(playerDeck);
+            playerDeck.draw(playingDeck);
+            playerDeck.draw(playingDeck);
 
-            dealerDeck.draw(dealerDeck);
-            dealerDeck.draw(dealerDeck);
+            dealerDeck.draw(playingDeck);
+            dealerDeck.draw(playingDeck);
 
             while(true) {
                 System.out.println("Your hand: ");
