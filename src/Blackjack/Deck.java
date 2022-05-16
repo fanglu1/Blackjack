@@ -1,6 +1,7 @@
 package Blackjack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class Deck {
@@ -23,16 +24,7 @@ public class Deck {
     }
 
     public void shuffle() {
-        ArrayList<Card> tempDeck = new ArrayList<Card>();
-        Random random = new Random();
-        int randomCardIndex = 0;
-        int originalSize = this.cards.size();
-        for(int i = 0; i < originalSize; i++){
-            randomCardIndex = random.nextInt((this.cards.size() - 1) + 1);
-            tempDeck.add(this.cards.get(randomCardIndex));
-            this.cards.remove(randomCardIndex);
-        }
-        this.cards = tempDeck;
+        Collections.shuffle(cards, new Random());
     }
 
     public String toString(){
@@ -86,10 +78,7 @@ public class Deck {
                 case SEVEN -> totalValue += 7;
                 case EIGHT -> totalValue += 8;
                 case NINE -> totalValue += 9;
-                case TEN -> totalValue += 10;
-                case JACK -> totalValue += 10;
-                case QUEEN -> totalValue += 10;
-                case KING -> totalValue += 10;
+                case TEN, JACK, QUEEN, KING -> totalValue += 10;
                 case ACE -> totalValue += 1;
             }
         }
