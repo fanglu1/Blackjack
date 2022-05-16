@@ -10,6 +10,8 @@ public class Blackjack {
         final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+        final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+        final String ANSI_WHITE = "\u001B[37m";
 
         System.out.println(ANSI_RED_BACKGROUND + ANSI_BLACK + "Welcome to Fang's not rigged Blackjack!!" + ANSI_RESET);
         Deck playingDeck = new Deck();
@@ -43,19 +45,19 @@ public class Blackjack {
 
             while (true) {
                 System.out.println("Your hand: ");
-                System.out.println(ANSI_RED + playerHand.toString());
+                System.out.println(ANSI_RED + playerHand.toString() + ANSI_RESET);
                 System.out.println("Your hand total is: " + playerHand.cardsValue());
 
-                System.out.println("The dealer's hand is: " + dealerHand.getCard(0).toString());
-                System.out.println("Second Card Covered");
+                System.out.println("The dealer's hand is: " + ANSI_RED + dealerHand.getCard(0).toString() + ANSI_RESET);
+                System.out.println(ANSI_RED + "Second Card Covered" + ANSI_RESET);
                 System.out.println("What's your move? 1) Hit 2) Stand");
                 int move = input.nextInt();
 
                 if (move == 1) {
                     playerHand.draw(playingDeck);
-                    System.out.println("You draw: " + playerHand.getCard(playerHand.deckSize() - 1).toString());
+                    System.out.println("You draw: " + ANSI_RED + playerHand.getCard(playerHand.deckSize() - 1).toString() + ANSI_RESET);
                     if (playerHand.cardsValue() > 21) {
-                        System.out.println("You busted!!! Card value: " + playerHand.cardsValue());
+                        System.out.println(ANSI_RED_BACKGROUND + "You busted!!! Card value: " + playerHand.cardsValue() + ANSI_RESET);
                         playerMoney -= playerBet;
                         endRound = true;
                         break;
@@ -65,43 +67,43 @@ public class Blackjack {
                     break;
                 }
             }
-            System.out.println("Dealer's hand: " + dealerHand.toString());
+            System.out.println("Dealer's hand: " + ANSI_RED + dealerHand.toString() + ANSI_RESET);
             if ((dealerHand.cardsValue() > playerHand.cardsValue()) && !endRound) {
-                System.out.println("House wins! lol definitely not rigged!");
+                System.out.println(ANSI_RED_BACKGROUND + "House wins! lol definitely not rigged!" + ANSI_RESET);
                 playerMoney -= playerBet;
                 endRound = true;
             }
             while ((dealerHand.cardsValue()) < 17 && !endRound) {
                 dealerHand.draw(playingDeck);
-                System.out.println("Dealer draws: " + dealerHand.getCard(dealerHand.deckSize() - 1).toString());
+                System.out.println("Dealer draws: " + ANSI_RED + dealerHand.getCard(dealerHand.deckSize() - 1).toString() + ANSI_RESET);
             }
             System.out.println("Dealers hand total: " + dealerHand.cardsValue());
             if ((dealerHand.cardsValue() > 21) && !endRound) {
-                System.out.println("Dealer messed up, you win!");
+                System.out.println(ANSI_GREEN_BACKGROUND + ANSI_BLACK + "Dealer messed up, you win!" + ANSI_RESET);
                 playerMoney += playerBet;
                 endRound = true;
             }
             if ((playerHand.cardsValue() == dealerHand.cardsValue()) && !endRound) {
-                System.out.println("Push");
+                System.out.println(ANSI_BLUE_BACKGROUND + ANSI_BLACK + "Push" + ANSI_RESET);
                 endRound = true;
             }
 
             if ((playerHand.cardsValue() > dealerHand.cardsValue()) && !endRound) {
-                System.out.println("You won!");
+                System.out.println(ANSI_GREEN_BACKGROUND + ANSI_BLACK + "You won!" + ANSI_RESET);
                 playerMoney += playerBet;
                 endRound = true;
             } else if (!endRound) {
-                System.out.println("You lost!");
+                System.out.println(ANSI_RED_BACKGROUND + "You lost!" + ANSI_RESET);
                 playerMoney -= playerBet;
                 endRound = true;
             }
 
             playerHand.moveToDeck(playingDeck);
             dealerHand.moveToDeck(playingDeck);
-            System.out.println("Round ends!");
+            System.out.println( "Round ends!");
         }
         if (playerMoney == 0) {
-            System.out.println(ANSI_WHITE_BACKGROUND + ANSI_BLACK + "You out of cash! Go to the ATM and get some more $$" + ANSI_RESET);
+            System.out.println(ANSI_GREEN_BACKGROUND + ANSI_BLACK + "You out of cash! Go to the ATM and get some more $$" + ANSI_RESET);
         }
     }
 }
