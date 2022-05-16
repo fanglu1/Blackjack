@@ -28,11 +28,13 @@ public class Deck {
     }
 
     public String toString(){
-        String cardListOutput = "";
+        final String ANSI_RED = "\u001B[31m";
+
+        StringBuilder cardListOutput = new StringBuilder();
         for( Card aCard : this.cards){
-            cardListOutput += "\n " + aCard.toString();
+            cardListOutput.append("\n ").append(aCard.toString());
         }
-        return cardListOutput;
+        return cardListOutput.toString();
     }
 
     public void removeCard(int i) {
